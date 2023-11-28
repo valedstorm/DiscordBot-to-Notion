@@ -7,14 +7,16 @@ import asyncio
 import aiohttp
 from core.queryRecord import QueryRecord
 from core.addRecord import AddRecord
+from typing import Optional
 
 # 建立一個 Cog 類別
 class Add(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
     
-    @app_commands.command(name = "url", description = "添加 url 進入剪藏")
-    async def add_url(self, interaction: discord.Interaction, url: str, tags_str: str):
+    @app_commands.command(name="url", description="添加 url 進入剪藏")
+    @app_commands.describe(tags_str="添加指定標簽，不填默認為 misc")
+    async def add_url(self, interaction: discord.Interaction, url: str, tags_str: Optional[str] = "misc"):
         # 確認互動
         await interaction.response.defer()
         
