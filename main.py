@@ -2,6 +2,11 @@ import os
 import asyncio
 import discord
 from discord.ext import commands
+from dotenv import load_dotenv
+
+# 載入環境變數
+load_dotenv()
+DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix='!', intents=intents)
@@ -41,7 +46,7 @@ async def load_extensions():
 async def main():
     async with bot:
         await load_extensions()
-        await bot.start("MTE3NDkyOTkxMzIzMzU0NzI2NA.Gn5BJ2.nWtr1ciP1LbNIhV0S5ymHHGwjIT5WiFF-RLvQ8")
+        await bot.start(DISCORD_TOKEN)
 
 # 確保文件被直接運行時才執行 bot.run() 函數，避免導入時自動運行
 if __name__ == "__main__":
