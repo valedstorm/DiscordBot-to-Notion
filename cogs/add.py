@@ -15,6 +15,9 @@ class Add(commands.Cog):
     
     @app_commands.command(name = "url", description = "添加 url 進入剪藏")
     async def add_url(self, interaction: discord.Interaction, url: str, tags_str: str):
+        # 確認互動
+        await interaction.response.defer()
+        
         # 檢查 url 格式
         if validators.url(url):
             # 啓動異步任務
@@ -30,17 +33,19 @@ class Add(commands.Cog):
                 
                 # 執行寫入，返回消息
                 msg = AddRecord.addURL(contributor, url, title, tags, time)
-                # 回覆使用者的訊息
-                await interaction.response.send_message(msg)
+                # 發送實際的回應
+                await interaction.followup.send(
+                    embed=EmbedTemplate.normal(msg)
+                )
                 return
             else:
-                await interaction.response.send_message(
+                await interaction.followup.send(
                     # embed=EmbedTemplate.normal(msg, title="使用示例"), ephemeral=True
                     embed=EmbedTemplate.error("URL 已存在")
                 )
                 return
         else:
-            await interaction.response.send_message(
+            await interaction.followup.send(
                 embed=EmbedTemplate.error("無效的 URL 格式")
             )
 
