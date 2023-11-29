@@ -50,6 +50,42 @@ class Add(commands.Cog):
             await interaction.followup.send(
                 embed=EmbedTemplate.error("無效的 URL 格式")
             )
+    
+    @app_commands.command(name="list", description="添加 `清單` 事務")
+    async def add_list(self, interaction: discord.Interaction, content: str, tags_str: Optional[str] = None):
+        # 確認互動
+        await interaction.response.defer()
+
+        # 準備要寫入的值
+        contributor = f"@{interaction.user.name}"
+        tags = Utils.getTags(tags_str)
+        time = Utils.getTime()
+
+        # 取得 response 返回結果
+        msg = AddRecord.addContent(contributor, content, tags, time)
+        
+        # 發送實際的消息回應
+        await interaction.followup.send(
+            embed=EmbedTemplate.normal(msg)
+        )
+    
+    @app_commands.command(name="note", description="添加 `備忘錄` 隨記")
+    async def add_note(self, interaction: discord.Interaction, content: str, tags_str: Optional[str] = None):
+        # 確認互動
+        await interaction.response.defer()
+
+        # 準備要寫入的值
+        contributor = f"@{interaction.user.name}"
+        tags = Utils.getTags(tags_str)
+        time = Utils.getTime()
+
+        # 取得 response 返回結果
+        msg = AddRecord.addContent(contributor, content, tags, time, True)
+        
+        # 發送實際的消息回應
+        await interaction.followup.send(
+            embed=EmbedTemplate.normal(msg)
+        )
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(Add(bot))

@@ -10,9 +10,12 @@ class Utils:
     # 取得標簽：以空白切割字符串，並去除每一個元素的前後空白，轉小寫
     @staticmethod
     def getTags(input_string):
-        processed_list = [tag.strip().lower() for tag in input_string.split()]
-        unique_list = list(set(processed_list))
-        return unique_list
+        # 判斷為 None
+        if input_string != None:
+            processed_list = [tag.strip().lower() for tag in input_string.split()]
+            unique_list = list(set(processed_list))
+            return unique_list
+        return []
     
     # 時區時間
     @staticmethod

@@ -8,7 +8,7 @@ load_dotenv()
 class QueryRecord:
 
     NOTION_API_KEY = os.getenv("NOTION_API_KEY")
-    DATABASE_ID = os.getenv("DATABASE_ID")
+    URL_DATABASE_ID = os.getenv("URL_DATABASE_ID")
 
     @classmethod
     def _api_query(cls, params={}):
@@ -22,7 +22,7 @@ class QueryRecord:
 
         # 發送 POST 請求
         response = requests.post(
-            f'https://api.notion.com/v1/databases/{cls.DATABASE_ID}/query',
+            f'https://api.notion.com/v1/databases/{cls.URL_DATABASE_ID}/query',
             headers=headers,
             json=params
         )
