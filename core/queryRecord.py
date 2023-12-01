@@ -8,7 +8,7 @@ load_dotenv()
 class QueryRecord:
 
     NOTION_API_KEY = os.getenv("NOTION_API_KEY")
-    URL_DATABASE_ID = os.getenv("URL_DATABASE_ID")
+    DATABASE_ID = os.getenv("DATABASE_ID")
 
     @classmethod
     def _api_query(cls, params={}):
@@ -22,7 +22,7 @@ class QueryRecord:
 
         # 發送 POST 請求
         response = requests.post(
-            f'https://api.notion.com/v1/databases/{cls.URL_DATABASE_ID}/query',
+            f'https://api.notion.com/v1/databases/{cls.DATABASE_ID}/query',
             headers=headers,
             json=params
         )
@@ -37,6 +37,6 @@ class QueryRecord:
     @staticmethod
     def isExistURL(url):
         # 設定參數，沒有默認查找整張表
-        params = {"filter": {"property": "URL", "url": {"equals": url}}}
+        params = {"filter": {"property": "網址", "url": {"equals": url}}}
         result = QueryRecord._api_query(params)
         return True if len(result) != 0 else False
