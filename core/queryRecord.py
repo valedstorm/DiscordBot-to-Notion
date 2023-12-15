@@ -37,6 +37,6 @@ class QueryRecord:
     @staticmethod
     def isExistURL(url):
         # 設定參數，沒有默認查找整張表
-        params = {"filter": {"property": "網址", "url": {"equals": url}}}
+        params = {"filter": {"property": "URL", "url": {"equals": url}}}
         result = QueryRecord._api_query(params)
         return True if len(result) != 0 else False

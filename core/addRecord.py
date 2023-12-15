@@ -33,16 +33,15 @@ class AddRecord:
             return f"Request failed with status code {response.status_code}, {response.text}."
 
     @classmethod
-    def addURL(cls, contributor, title, url, content, time):
+    def addURL(cls, name, url):
         # 包裝字典資料
         data = {
             "parent": {"database_id": cls.DATABASE_ID},
             "properties": {
-                "作者": {"title": [{"text": {"content": contributor}}]},
-                "標題": {"rich_text": [{"text": {"content": title}, "annotations": {"bold": True,"italic": False,"strikethrough": False,"underline": False,"code": False,"color": "yellow"}}]},
-                "網址": {"url": url},
-                "當時大腦内的想法": {"rich_text": [{"text": {"content": content}}]},
-                "時間": {"date": {"start": time}}
+                "Name": {"title": [{"text": {"content": name}}]},
+                "URL": {"url": url},
+                # "文字框": {"rich_text": [{"text": {"content": content}, "annotations": {"bold": True,"italic": False,"strikethrough": False,"underline": False,"code": False,"color": "yellow"}}]},
+                # "時間": {"date": {"start": time}}
             }
         }
 

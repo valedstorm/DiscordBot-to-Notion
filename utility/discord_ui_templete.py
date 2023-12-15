@@ -15,9 +15,8 @@ class EmbedTemplate:
         embed = discord.Embed(color=0xB54031, **kwargs)
         embed.description = str(exception)
 
-        if "title" not in kwargs:
-            embed.title = "Oops! An error occurred."
-
+        # if "title" not in kwargs:
+        #     embed.title = "Oops! An error occurred."
         return embed
 
-# from: https://github.com/KT-Yeh/Genshin-Discord-Bot/blob/master/utility/discord_ui_template.py
+# https://github.com/KT-Yeh/Genshin-Discord-Bot/blob/master/utility/discord_ui_template.py
