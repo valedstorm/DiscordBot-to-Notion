@@ -15,7 +15,10 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 # 啟動完成時
 @bot.event
 async def on_ready():
+    # 要同步樹
+    slash = await bot.tree.sync()
     print(f'We have logged in as {bot.user}')
+    print(f"Loaded {len(slash)} slash commands")
 
 # 載入模組
 @bot.command(help="載入一個模組")
